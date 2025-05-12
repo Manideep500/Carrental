@@ -1,0 +1,51 @@
+<html>
+<nav class="navbar">
+    <div class="nav-right">
+        <a routerLink="/">Home</a>
+        <a routerLink="/vehicletypes">Vechile  types </a>
+        <a routerLink="/about">About Us</a>
+        <a routerLink="/contact">Contact</a>
+        <a routerLink="/login">Login/Sign Up</a>
+    </div>
+</nav>
+          <h1 style="text-align: center; margin-top: 100px;">Vehicle Models</h1>
+          <p style="text-align: center;font-size:18px; font-family: Arial, Helvetica, sans-serif;color: rgb(173, 166, 166);">Our rental fleet. To contribute to positive change and achieve our sustainability goals with many extraordinary.</p>
+         
+         <div class="selectlocation">
+          <label style="font-size: 20px; font-family: Arial, Helvetica, sans-serif;">Select-Location:</label>
+          <select [(ngModel)]="selectlocation" name="location" >
+                <option value=''disabled hidden>select location</option> 
+                <option *ngFor="let location of locations" >{{location}}</option>
+        </select>
+         </div>
+
+           <div class="car1" >
+            <button *ngFor="let car of cars" 
+                (click)="selectcar(car)"
+            >{{car.name}}
+            </button>
+         </div>
+
+
+    <div *ngIf='selectedcars' class="car2">
+        <div>
+          <img [src]="selectedcars.photo" alt="{{selectedcars.name}}" class="c2">
+        </div>
+
+        <div class="cardetails">
+            <h3>{{selectedcars.name}}</h3>
+            <ul>
+                
+            <li> <b style="color: green;">Luggage: </b>{{selectedcars.Luggage}}</li><br>
+            <li><b style="color: green;">  Model: </b>{{selectedcars.Model}}</li><br>
+             <li><b style="color: green;">Milage: </b> {{selectedcars.milage}}KM</li><br>
+             <li><b style="color: green;">Re-Fund: </b>Full repayment</li>
+             <p></p>
+            <button (click)="booknow()" style="margin-top: 10px; padding: 10px; border-radius: 5px;">BookNow</button>
+
+            </ul>
+       
+        </div>
+    </div>
+
+</html>
