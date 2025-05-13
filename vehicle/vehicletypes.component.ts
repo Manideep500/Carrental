@@ -16,7 +16,6 @@ export class VehicletypesComponent {
     {  name: 'Tempo', Model: 2016, Luggage: '6 bags',milage:40, photo: '/assets/Tempo1.jpg' }
   ];
   selectedcars:any=this.cars[0];
-  
   locations:string[]=["Banglore","Chennai","Hyderbad","Mumbai"];
   selectlocation:string='';
   pickupdate:string=''; //we need to type here yyyy-mm-dd format
@@ -26,28 +25,6 @@ export class VehicletypesComponent {
   {
 
   }
-  // constructor(private http:HttpClient,private router:Router)
-  // {}
-// ngOnInit():void{
-// this.http.get<any>('/assets/cars.json').subscribe(data=>
-// {
-//   this.cars=data.cars;
-//   this.selectedcars=this.cars[0];//default car image 1 will be displayed
-// }
-// )}
-// ngOnInit(): void {
-//   this.cars = [
-//     {  name: 'SUV', Model: 2023, Luggage: '2 bags', milage:30, photo: '/assets/Suv1.jpeg' },
-//     {  name: 'Seaden', Model: 2022, Luggage: '6 bags',milage:20, photo: '/assets/sedan.jpg' },
-//     {  name: 'Hyundai', Model: 2021, Luggage: '3 bags',milage:25, photo: '/assets/Hyundai.webp'},
-//     {  name: 'Honda', Model: 2020, Luggage: '4 bags',milage:35, photo: '/assets/honda.jfif' },
-//     {  name: 'Tempo', Model: 2016, Luggage: '6 bags',milage:40, photo: '/assets/Tempo1.jpg' }
-//   ];
-//   this.selectedcars = this.cars[0];//default car image 1 will be displayed
-
-// }
-
-
 public selectcar(car:any)
 {
   this.selectedcars=car;
@@ -59,9 +36,6 @@ formvalid()
   this.pickupdate &&
   this.returndate 
 );}
-
-
-
 
 public booknow()
 {
