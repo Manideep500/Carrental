@@ -1,0 +1,42 @@
+{
+    "cars":[
+    {
+    "id":"4seater",
+    "name":"SUV",
+    "Model":2023,
+    "Luggage":"2 bags",
+    "photo":"/assets/Suv1.jpeg"
+
+},
+{
+
+    "id":"5seater",
+    "name":"Seaden",
+    "Model":2022,
+    "Luggage":"6 bags",
+    "photo":"/assets/sedan.jpg"
+
+},
+{
+    "id":"6seater",
+    "name":"compact",
+    "Model":2021,
+    "Luggage":"3 bags",
+    "photo":"/assets/compact.jpg"
+},
+{
+    "id":"7seater",
+    "name":"Bmw",
+    "Model":2020,
+    "Luggage":"4 bags",
+    "photo":"/assets/Bmw1.avif"
+},
+{
+    "id":"luxuary",
+    "name":"Tempo",
+    "Model":2016,
+    "Luggage":"6 bags",
+    "photo":"/assets/Tempo1.jpg"
+}
+]
+}
