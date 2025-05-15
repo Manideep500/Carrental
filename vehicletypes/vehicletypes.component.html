@@ -1,0 +1,67 @@
+<html>
+
+<div class="selectlocation1">
+
+    <h1 style="text-align: center; margin-top: 100px; padding-top: 10px;">Vehicle Models</h1>
+     <p style="text-align: center;font-size:18px; font-family: Arial, Helvetica, sans-serif;color:silver">Our
+    rental fleet. To contribute to positive change and achieve our sustainability goals with many extraordinary.</p>
+<!-- for selecting location -->
+    <label style="font-size: 20px; margin-left:450px;">Select Location:</label>
+    <select  [(ngModel)]="selectlocation">
+        <option value="" disabled hidden>select location</option>
+        <option *ngFor="let location of locations">{{location}}</option>
+    </select>
+
+    <!-- pickup date -->
+    <div class="date">
+        <label>Pickup Date:</label>
+        <input type="date" [min]='today' [(ngModel)]="pickupdate">
+
+    <!-- return date -->
+         <label style="padding-left: 10px;">Return Date:</label>
+        <input type="date" [min]='pickupdate' [(ngModel)]="returndate">
+
+    <!-- select category-->
+        <select class="category" [(ngModel)]="selectcategory" (change)="oncategorychange()">
+            <option value='' disabled hidden>select category</option>
+            <option *ngFor="let category of categories">{{category}}</option>
+        </select>
+
+    </div>
+
+</div>
+
+<!-- display car buttons -->
+<div class="car1">
+    <button *ngFor="let car of cars" [disabled]="car.category!=selectcategory" (click)="selectcar(car)">
+        {{car.name}}
+    </button>
+</div>
+
+
+
+<!-- it will check if selectedcars variable  is empty or not if not empty then it will display selected car image  -->
+<div *ngIf='selectedcars' class="car2">
+    <div>
+        <img [src]="selectedcars.photo" alt="{{selectedcars.name}}" class="c2">
+    </div>
+
+    <div class="cardetails">
+        <h3>{{selectedcars.name}}</h3>
+        <ul>
+
+            <li> <b style="color: green;">Luggage: </b>{{selectedcars.Luggage}}</li><br>
+            <li><b style="color: green;"> Model: </b>{{selectedcars.Model}}</li><br>
+            <li><b style="color: green;">Milage: </b> {{selectedcars.milage}}KM</li><br>
+            <li><b style="color: green;">Re-Fund: </b>Full repayment</li>
+            <p></p>
+            <button (click)="booknow()" [disabled]="!formvalid()">BookNow</button>
+        </ul>
+
+    </div>
+</div>
+
+
+
+
+</html>
