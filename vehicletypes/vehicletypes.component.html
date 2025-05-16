@@ -21,15 +21,15 @@
          <label style="padding-left: 10px;">Return Date:</label>
         <input type="date" [min]='pickupdate' [(ngModel)]="returndate">
 
-    <!-- select category-->
-        <select class="category" [(ngModel)]="selectcategory" (change)="oncategorychange()">
+<!-- select category -->
+    </div>
+    <div class="category">
+     <select  [(ngModel)]="selectcategory" (change)="oncategorychange()">
             <option value='' disabled hidden>select category</option>
             <option *ngFor="let category of categories">{{category}}</option>
-        </select>
-
+    </select>
     </div>
-
-</div>
+ </div>
 
 <!-- display car buttons -->
 <div class="car1">
