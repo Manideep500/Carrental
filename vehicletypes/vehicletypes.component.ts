@@ -12,25 +12,35 @@ export class VehicletypesComponent implements OnInit {
   locations: string[] = ["Banglore", "Chennai", "Hyderbad", "Mumbai"];
   selectlocation: string = '';
   pickupdate: string = '';
-  today: string = new Date().toISOString().split('T')[0];
+  today: string = new Date().toISOString().split('T')[0];//it wiill give current date
   returndate: string = '';
   categories: string[] = ['economy', 'premier', 'luxury'];
   selectcategory: string = '';
   carTypes: string[] = ['sedan', 'suv', 'honda', 'hyundai', 'force'];
   cars: Car[] = [];
   selectedCartype: string = '';
-  displayCar: Car | null = null;
+  selectcar: any = null;
 
   constructor(
     private router: Router,
     private sharedService: SharedService,
     private carService: CarService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    //load all cars when page load
     this.carService.getAvailableCars().subscribe((cars) => {
       this.cars = cars;
     });
+  }
+
+  checkreturndate() {
+    const pickupd = new Date(this.pickupdate);
+    const returnd = new Date(this.returndate);
+    if (pickupd.getMonth() != returnd.getMonth()) {
+      alert("Return date should not be more than 30 days");
+      this.returndate = " ";
+    }
   }
 
   formvalid() {
@@ -38,31 +48,37 @@ export class VehicletypesComponent implements OnInit {
       this.selectlocation &&
       this.pickupdate &&
       this.returndate &&
-      this.selectcategory && 
-      this.selectedCartype &&
-      this.displayCar
+      this.selectcategory &&
+      this.selectedCartype
     );
   }
 
   oncategorychange() {
-    this.selectedCartype = '';
     // Show the first car in this category by default
-    const firstCar = this.cars.find(car => car.carCategory === this.selectcategory);
-    this.displayCar = firstCar ? firstCar : null;
+    const filtered = this.cars.find(car => car.carCategory == this.selectcategory);
+    this.selectcar = filtered;
   }
 
+  
+  //buttons should be enable basedon category and type
   isTypeEnabled(type: string): boolean {
-    return !!this.cars.find(
-      car => car.carCategory === this.selectcategory && car.cartype === type
-    );
+    for (let car of this.cars) {
+      if (car.carCategory === this.selectcategory && car.cartype === type) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  selectCarType(cartype: string) {
-    this.selectedCartype = cartype;
-    const filtered = this.cars.filter(
-      car => car.carCategory === this.selectcategory && car.cartype === cartype
-    );
-    this.displayCar = filtered.length > 0 ? filtered[0] : null;
+  selectCarType(type: string) {
+    this.selectedCartype = type;
+    for (let car of this.cars) {
+      if (car.carCategory === this.selectcategory && car.cartype === type) {
+        this.selectcar = car;
+        return;
+      }
+    }
+    this.selectcar = null;
   }
 
   getTwoFeatures(features: string[] | undefined): string[] {
@@ -70,15 +86,15 @@ export class VehicletypesComponent implements OnInit {
   }
 
   public booknow() {
-    if (this.displayCar) {
-      this.sharedService.setCityAndCar(
-        this.selectlocation,
-        this.displayCar.make,
-        this.displayCar.model,
-        this.pickupdate,
-        this.returndate
-      );
-      this.router.navigate(['/carlist']);
-    }
+
+    this.sharedService.setCityAndCar(
+      this.selectlocation,
+      this.selectcar.make,
+      this.selectcar.model,
+      this.pickupdate,
+      this.returndate
+    );
+    this.router.navigate(['/carlist']);
+
   }
 }
