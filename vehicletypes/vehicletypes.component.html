@@ -11,13 +11,14 @@
         <option *ngFor="let location of locations">{{location}}</option>
     </select>
 
-    <!-- Date selection -->
+    <!-- pickupdate -->
     <div class="date">
         <label>Pickup Date:</label>
         <input type="date" [min]='today' [(ngModel)]="pickupdate">
 
+        <!-- returndate -->
         <label style="padding-left: 10px;">Return Date:</label>
-        <input type="date" [min]='pickupdate' [(ngModel)]="returndate">
+        <input type="date" [min]='pickupdate' [(ngModel)]="returndate" (change)="checkreturndate()">
     </div>
 
     <!-- Category selection -->
@@ -29,21 +30,24 @@
     </div>
 </div>
 
+<!-- select cartypes -->
 <div class="car1" *ngIf="selectcategory">
-    <button *ngFor="let type of carTypes" (click)="selectCarType(type)" [class.selected]="selectedCartype === type"
-        [disabled]="!isTypeEnabled(type)">
+    <button *ngFor="let type of carTypes" [disabled]="!isTypeEnabled(type)" (click)="selectCarType(type)">
+
         {{type}}
     </button>
 </div>
 
-<div *ngIf="displayCar" class="car2">
+
+
+<div *ngIf="selectcar" class="car2">
     <div>
-        <img [src]="'http://localhost:3000' + displayCar.imageUrl[0]" alt="{{displayCar.make}}" class="c2">
+        <img [src]="'http://localhost:3000' + selectcar.imageUrl[0]" alt="{{selectcar.make}}" class="c2">
     </div>
     <div class="cardetails">
-        <h3>{{displayCar.make}} {{displayCar.model}}</h3>
+        <h3>{{selectcar.make}} {{selectcar.model}}</h3>
         <ul>
-            <li *ngFor="let feat of getTwoFeatures(displayCar.features)">
+            <li *ngFor="let feat of getTwoFeatures(selectcar.features)">
                 <b style="color: green;">Feature: </b>{{feat}}
             </li>
         </ul>
